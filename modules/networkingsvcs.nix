@@ -1,5 +1,7 @@
 { lib, config, pkgs, ... }:
-{
+let
+    cfg = config.networkingsvcs;
+in {
   options = {
     networkingsvcs.enable = lib.mkEnableOption "Setup networking services";
     networkingsvcs.hostName = lib.mkOption {
@@ -33,17 +35,17 @@
     };
   };
 
-  config = lib.mkIf config.networkingsvcs.enable {
-    networking.hostName = config.networkingsvcs.hostName;
+  config = lib.mkIf cfg.enable {
+    networking.hostName = cfg.hostName;
   
-    networking.nameservers = config.networkingsvcs.nameservers;
+    networking.nameservers = cfg.nameservers;
     networking.networkmanager.enable = true;
   
     networking.nftables.enable = true;
-    networking.firewall.allowedTCPPorts = config.networkingsvcs.allowedTCPPorts;
-    networking.firewall.allowedUDPPorts = config.networkingsvcs.allowedUDPPorts;
+    networking.firewall.allowedTCPPorts = cfg.allowedTCPPorts;
+    networking.firewall.allowedUDPPorts = cfg.allowedUDPPorts;
     networking.firewall.enable = true;
-    networking.firewall.allowPing = config.networkingsvcs.allowPing;
+    networking.firewall.allowPing = cfg.allowPing;
     
     services.resolved = {
       enable = true;

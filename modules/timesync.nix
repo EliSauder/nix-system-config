@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-{
+let
+    cfg = config.timesync;
+in {
   imports = [
     ./services/chrony.nix
     ./services/tzupdate.nix
@@ -19,12 +21,12 @@
       description = "The default time zone";
     };
   };
-  config = lib.mkIf config.timesync.enable {
+  config = lib.mkIf cfg.enable {
     
-    time.timeZone = config.timesync.defaultTimeZone;
+    time.timeZone = if cfg.enableTzUpdate then null else cfg.defaultTimeZone;
 
-    chrony.enable = config.timesync.enableChrony;
+    chrony.enable = cfg.enableChrony;
 
-    tzupdate.enable = config.timesync.enableTzUpdate;
+    tzupdate.enable = cfg.enableTzUpdate;
   };
 }

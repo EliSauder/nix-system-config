@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
-{
+let
+    cfg = config.tzupdate;
+in {
   options = {
     tzupdate.enable = lib.mkEnableOption "Enable updating timezones automatically";
   };
-  config = lib.mkIf config.tzupdate.enable {
+  config = lib.mkIf cfg.enable {
 
     services.tzupdate.enable = true;
 

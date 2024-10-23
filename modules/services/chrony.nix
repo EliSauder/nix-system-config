@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-{
+let
+    cfg = config.chrony;
+in {
   options = {
     chrony.enable = lib.mkEnableOption "Enable updating time sync options";
     chrony.servers = lib.mkOption {
@@ -12,10 +14,10 @@
       description = "The time servers to use";
     };
   };
-  config = lib.mkIf config.chrony.enable {
-    services.chrony = lib.mkIf config.chrony.enable {
-      enable = config.chrony.enableChrony;
-      servers = config.chrony.servers;
+  config = lib.mkIf cfg.enable {
+    services.chrony = lib.mkIf cfg.enable {
+      enable = true;
+      servers = cfg.servers;
     };
   };
 }

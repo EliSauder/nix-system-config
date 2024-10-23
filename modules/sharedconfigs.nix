@@ -9,6 +9,9 @@
       ./sys-packages.nix
     ];
 
+    timesync.enable = true;
+    pipewire.enable = true;
+    networkingsvcs.enable = true;
   
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
  

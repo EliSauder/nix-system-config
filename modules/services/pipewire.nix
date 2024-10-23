@@ -1,12 +1,14 @@
 { config, lib, pkgs, ... }:
-{
+let
+    cfg = config.pipewire;
+in {
   options = {
     pipewire.enable = lib.mkEnableOption "Enable pipewire";
     pipewire.enableAlsa = lib.mkOption {
       default = true;
       description = "Enable alsa support";
     };
-    pipewire.enablePluse = lib.mkOption {
+    pipewire.enablePulse = lib.mkOption {
       default = true;
       description = "Enable pulse support";
     };
@@ -15,12 +17,13 @@
       description = "Enable jack support";
     };
   };
-  config = lib.mkIf config.pipewire.enable {
+  config = lib.mkIf cfg.enable {
     services.pipewire = {
       enable = true;
-      pulse.enable = config.pipewire.enablePulse;
-      alsa.enable = config.pipewire.enableAlsa;
-      jack.enable = config.pipewire.enableJack;
+      pulse.enable = cfg.enablePulse;
+      alsa.enable = cfg.enableAlsa;
+      alsa.support32Bit = cfg.enableAlsa;
+      jack.enable = cfg.enableJack;
     };
   };
 }
