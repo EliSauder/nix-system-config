@@ -42,8 +42,10 @@
   fonts.packages = with pkgs; [
     nerdfonts
     noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
+    noto-fonts-lgc-plus
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-color-emoji
     unifont
     unifont_upper
     freefont_ttf
