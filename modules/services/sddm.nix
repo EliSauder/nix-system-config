@@ -10,6 +10,7 @@ in {
       enable = true;
       wayland.enable = true;
       autoNumlock = true;
+      enableHidpi = true;
     };
   };
 }

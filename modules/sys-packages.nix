@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     ## Groups of packages
@@ -31,6 +31,7 @@
     zsh
     tmux
     # Applications
+    pavucontrol
     kitty
     firefox
     vlc
@@ -38,6 +39,10 @@
     # Other
     libdrm
     nerdfonts
+    # UI
+    layan-gtk-theme
+    layan-kde
+    tela-icon-theme
   ];
   fonts.packages = with pkgs; [
     nerdfonts
