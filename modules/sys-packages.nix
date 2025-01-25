@@ -16,6 +16,8 @@
     openssl
     openssh
     unzip
+    zip
+    p7zip
     # Build
     libgcc
     gdb
@@ -38,15 +40,14 @@
     mpv
     # Other
     libdrm
-    nerdfonts
+    ffmpeg
     # UI
     layan-gtk-theme
     layan-kde
     tela-icon-theme
   ];
   fonts.packages = with pkgs; [
-    nerdfonts
-    noto-fonts
+    nerd-fonts.fira-code
     noto-fonts-lgc-plus
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
@@ -59,7 +60,6 @@
     fira-code
     fira-code-symbols
     fira-sans
-    fira-code-nerdfont
     fira-go
     fira-math
     gyre-fonts

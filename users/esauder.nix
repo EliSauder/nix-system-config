@@ -2,6 +2,6 @@
 {
   users.users.esauder = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "audio" ];
   };
 }

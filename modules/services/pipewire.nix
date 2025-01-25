@@ -28,21 +28,21 @@ in {
 
       wireplumber.enable = true;
 
+      #extraConfig.pipewire."92-low-latency" = {
+      #    "context.properties" = {
+      #      "default.clock.rate" = 48000;
+      #      "default.clock.quantum" = 128;
+      #      "default.clock.min-quantum" = 64;
+      #      "default.clock.max-quantum" = 256;
+      #    };
+      #};
+
       wireplumber.extraConfig.bluetoothEnhancements = {
           "monitor.bluez.properties" = {
 	      "bluez5.enable-sbc-xq" = true;
 	      "bluez5.enable-msbc" = true;
 	      "bluez5.enable-hw-volume" = true;
 	      "bluez5.roles" = [ "hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag" ];
-	  };
-      };
-
-      extraConfig.pipewire."92-low-latency" = {
-          "context.properties" = {
-	      "default.clock.rate" = 48000;
-	      "default.clock.quantum" = 32;
-	      "default.clock.min-quantum" = 32;
-	      "default.clock.max-quantum" = 32;
 	  };
       };
     };

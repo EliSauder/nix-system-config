@@ -49,7 +49,7 @@ in {
     
     services.resolved = {
       enable = true;
-      dnssec = "allow-downgrade";
+      #dnssec = "allow-downgrade";
       domains = [ "~." ];
       fallbackDns = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.4.4.8" ];
       dnsovertls = "opportunistic";

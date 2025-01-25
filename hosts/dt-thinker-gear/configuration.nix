@@ -9,7 +9,7 @@
       ./../../modules/ui.nix
     ];
 
-  sddm.enable = true;
+  greetd.enable = true;
   hyprland.enable = true;
   hyprland.useNvidia = false;
 

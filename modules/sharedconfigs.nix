@@ -14,22 +14,53 @@
     networkingsvcs.enable = true;
   
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    programs.gnupg.agent = {
+    	enable = true;
+	enableSSHSupport = true;
+    };
  
     nix.gc.automatic = true;
 
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
     services.blueman.enable = true;
 
     programs.dconf.enable = true;
     
     services.gnome.gnome-browser-connector.enable = true;
 
-    security.polkit.enable = true;
     boot.extraModulePackages = with config.boot.kernelPackages; [
         v4l2loopback
     ];
+    boot.kernelModules = [
+       "v4l2loopback"
+    ];
     boot.extraModprobeConfig = ''
-        options v4l2loopback devices=3 video_nr=1,1,1 card_label=v-loopback-1,v-loopback-2,v-loopback-3 exclusive_caps=1,1,1
+        options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     '';
+
+    services.udev.packages = [ pkgs.yubikey-personalization ];
+
+    services.gnome.gnome-keyring.enable = true;
+    security.polkit.enable = true;
+    security.pam.services = {
+    	sddm.enableGnomeKeyring = true;
+	hyprlock.enableGnomeKeyring = true;
+    };
+
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "1password"
+	"1password-cli"
+    ];
+    programs._1password.enable = true;
+    programs._1password-gui = {
+    	enable = true;
+	# TODO: Update to be more dynamic and not require the hardcoding of user names
+	polkitPolicyOwners = [
+	    "esauder"
+	];
+    };
 
     programs.firefox = let
         lock-false = {
