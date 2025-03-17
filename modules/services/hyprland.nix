@@ -12,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     hardware.nvidia.modesetting.enable = cfg.useNvidia;
     environment.systemPackages = [
-        pkgs.polkit-kde-agent
+        pkgs.kdePackages.polkit-kde-agent-1
     ];
     programs.hyprland = {
       enable = true;
@@ -22,7 +22,7 @@ in {
       withUWSM = true;
     };
     environment.variables = {
-        POLKIT_AUTH_AGENT = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+        POLKIT_AUTH_AGENT = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
 	NIXOS_OZONE_WL = "1";
 	XDG_SESSION_TYPE = "wayland";
     };
