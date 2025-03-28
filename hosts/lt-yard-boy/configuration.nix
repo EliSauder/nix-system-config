@@ -1,6 +1,7 @@
 { config, lib, inputs, pkgs, system, ... }:
 {
   imports = [
+      ./../../modules/sharedconfigs.nix
       ./../../users/esauder.nix
     ];
       # List packages installed in system profile. To search by name, run:
@@ -24,4 +25,5 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
 }

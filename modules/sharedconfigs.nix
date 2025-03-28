@@ -3,21 +3,24 @@
 {
     imports = [
       ./boot/systemd.nix
+      ./boot/kernelOptions.nix
       ./networkingsvcs.nix
       ./timesync.nix
       ./sound.nix
       ./sys-packages.nix
     ];
 
-    timesync.enable = true;
-    pipewire.enable = true;
-    networkingsvcs.enable = true;
+    bootmng.systemd.enable = pkgs.stdenv.isLinux;
+
+    timesync.enable = pkgs.stdenv.isLinux;
+    pipewire.enable = pkgs.stdenv.isLinux;
+    networkingsvcs.enable = pkgs.stdenv.isLinux;
   
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     programs.gnupg.agent = {
     	enable = true;
-	enableSSHSupport = true;
+	    enableSSHSupport = true;
     };
  
     nix.gc.automatic = true;
@@ -27,18 +30,16 @@
     services.blueman.enable = true;
 
     programs.dconf.enable = true;
+
+
+# shells
+    programs.zsh.enable = true;
+    programs.fish.enable = true;
+
+    users.defaultUserShell = pkgs.fish;
     
     services.gnome.gnome-browser-connector.enable = true;
 
-    boot.extraModulePackages = with config.boot.kernelPackages; [
-        v4l2loopback
-    ];
-    boot.kernelModules = [
-       "v4l2loopback"
-    ];
-    boot.extraModprobeConfig = ''
-        options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    '';
 
     services.udev.packages = [ pkgs.yubikey-personalization ];
 
@@ -64,37 +65,37 @@
 
     programs.firefox = let
         lock-false = {
-	    Value = false;
-	    Status = "locked";
-	};
-	lock-true = {
-	    Value = true;
-	    Status = "locked";
-	};
-	lock-empty-string = {
-	    Value = "";
-	    Status = "locked";
-	};
+	        Value = false;
+	        Status = "locked";
+	    };
+	    lock-true = {
+	        Value = true;
+	        Status = "locked";
+	    };
+	    lock-empty-string = {
+	        Value = "";
+	        Status = "locked";
+	    };
     in {
         enable = true;
-	preferences = {
-	    "widget.use-xdg-desktop-portal.file-picker" = 1;
-	};
-	policies = {
-	    DisableTelemetry = true;
-	    DisableFirefoxStudies = true;
-	    DontCheckDefaultBrowser = true;
-	    DisablePocket = true;
-	    SearchBar = "unified";
-	    Preferences = {
-	        "extensions.pocket.enabled" = lock-false;
-		"browser.newtabpage.pinned" = lock-empty-string;
-		"browser.topsites.contile.enable" = lock-false;
-		"browser.newtabpage.activity-stream.showSponsored" = lock-false;
-		"browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
-		"browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+	    preferences = {
+	        "widget.use-xdg-desktop-portal.file-picker" = 1;
 	    };
-	};
+	    policies = {
+	        DisableTelemetry = true;
+	        DisableFirefoxStudies = true;
+	        DontCheckDefaultBrowser = true;
+	        DisablePocket = true;
+	        SearchBar = "unified";
+	        Preferences = {
+	            "extensions.pocket.enabled" = lock-false;
+	    	"browser.newtabpage.pinned" = lock-empty-string;
+	    	"browser.topsites.contile.enable" = lock-false;
+	    	"browser.newtabpage.activity-stream.showSponsored" = lock-false;
+	    	"browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
+	    	"browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+	        };
+	    };
     };
 
     environment.sessionVariables = {
