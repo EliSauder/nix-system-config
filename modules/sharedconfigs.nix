@@ -8,6 +8,7 @@
       ./timesync.nix
       ./sound.nix
       ./sys-packages.nix
+      ./environmentVariables.nix
     ];
 
     bootmng.systemd.enable = pkgs.stdenv.isLinux;
@@ -47,20 +48,20 @@
     security.polkit.enable = true;
     security.pam.services = {
     	sddm.enableGnomeKeyring = true;
-	hyprlock.enableGnomeKeyring = true;
+	    hyprlock.enableGnomeKeyring = true;
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "1password"
-	"1password-cli"
+	    "1password-cli"
     ];
     programs._1password.enable = true;
     programs._1password-gui = {
     	enable = true;
 	# TODO: Update to be more dynamic and not require the hardcoding of user names
-	polkitPolicyOwners = [
-	    "esauder"
-	];
+	    polkitPolicyOwners = [
+	        "esauder"
+	    ];
     };
 
     programs.firefox = let
@@ -96,10 +97,6 @@
 	    	"browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
 	        };
 	    };
-    };
-
-    environment.sessionVariables = {
-        MOZ_USE_XINPUT2 = "1";
     };
 
     i18n = {
