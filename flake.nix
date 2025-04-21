@@ -23,6 +23,16 @@
 
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
   outputs =
@@ -30,6 +40,9 @@
       self,
       nixpkgs,
       nix-darwin,
+      nix-homebrew,
+      homebrew-cask,
+      homebrew-core,
       ...
     }:
     {
@@ -48,6 +61,18 @@
           specialArgs = { inherit inputs; };
           system = "aarch64-darwin";
           modules = [
+            nix-homebrew.darwinModules.nix-homebrew {
+                nix-homebrew = {
+                    enable = true;
+                    enableRosetta = true;
+                    user = "esauder";
+                    taps = {
+                        "homebrew/homebrew-core" = homebrew-core;
+                        "homebrew/homebrew-cask" = homebrew-cask;
+                    };
+                    mutableTaps = false;
+                };
+            }
             ./hosts/lt-yard-boy/configuration.nix
           ];
         };

@@ -1,7 +1,13 @@
 {pkgs, options, config, lib, ...}:
 {
+    users.knownUsers = [
+        "esauder"
+    ];
+
     users.users.esauder = {
+        uid = 501;
         shell = pkgs.fish;
+        home = if pkgs.stdenv.isLinux then "/home/esauder" else "/Users/esauder";
     } //
     lib.optionalAttrs (options?users.users.esauder.extraGroups) {
         users.users.esauder.extraGroups = ["wheel" "audio"];

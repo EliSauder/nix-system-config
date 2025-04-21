@@ -5,17 +5,19 @@
   ];
 
   environment.systemPackages = with pkgs; [
-      zita-alsa-pcmi
       jack-example-tools
+  ] ++ 
+  (pkgs.lib.optionals pkgs.stdenv.isLinux [
+      zita-alsa-pcmi
       qpwgraph
       pavucontrol
       yabridge
       yabridgectl
-  ];
+  ]);
 
   #musnix = {
   #    enable = true;
-  #    alsaSeq.enable = true;
+  #    alsa‘zita-alsa-pcmi-0.6.1’Seq.enable = true;
   #    rtcqs.enable = true;
   #    rtirq.enable = true;
   #};

@@ -1,12 +1,11 @@
-{ config, options, lib, pkgs, ... }:
+{ config, lib, pkgs, options, ... }:
 let
     cfg = config.bootmng.systemd;
 in {
-    options.bootmng = {
-        systemd.enable = lib.mkEnableOption "Enable systemd";
-    };
+    options.bootmng.systemd.enable = lib.mkEnableOption "Enable systemd";
 
-    config = lib.optionalAttrs ((options?boot) && cfg.enable) {
+    config = {} //
+        lib.optionalAttrs ((options?boot) && cfg.enable) {
             boot.loader.systemd-boot.enable = true;
             boot.loader.efi.canTouchEfiVariables = true;
     };

@@ -19,7 +19,6 @@
     zip
     p7zip
     # Build
-    libgcc
     gdb
     glib
     clang
@@ -30,22 +29,25 @@
     jdk
     python3
     # Terminal
-    zsh
+    fish
     tmux
     # Applications
-    pavucontrol
-    kitty
+    wezterm
     firefox
-    vlc
     mpv
     # Other
-    libdrm
     ffmpeg
     # UI
+  ] ++
+  (pkgs.lib.optionals pkgs.stdenv.isLinux [
+    libgcc
+    pavucontrol
+    vlc
+    libdrm
     layan-gtk-theme
     layan-kde
     tela-icon-theme
-  ];
+  ]);
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     noto-fonts-lgc-plus
@@ -53,6 +55,7 @@
     noto-fonts-cjk-serif
     noto-fonts-color-emoji
     unifont
+    iosevka
     unifont_upper
     freefont_ttf
     liberation_ttf

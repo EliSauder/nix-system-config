@@ -1,11 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, options, ... }:
 let
     cfg = config.tzupdate;
 in {
   options = {
     tzupdate.enable = lib.mkEnableOption "Enable updating timezones automatically";
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.optionalAttrs ((options?services.tzupdate) && cfg.enable) {
 
     services.tzupdate.enable = true;
 
@@ -17,6 +17,7 @@ in {
          Persistent = true;
       };
     };
+
     systemd.services."tzupdate-timer" = {
       script = "systemctl start tzupdate.service";
       serviceConfig = {

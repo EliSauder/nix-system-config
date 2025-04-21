@@ -1,29 +1,49 @@
-{ config, lib, inputs, pkgs, system, ... }:
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 {
   imports = [
-      ./../../modules/sharedconfigs.nix
-      ./../../users/esauder.nix
+    ./../../modules/sharedconfigs.nix
+    ./../../users/esauder.nix
+  ];
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = [
+    pkgs.vim
+  ];
+
+  # Necessary for using flakes on this system.
+  # nix.settings.experimental-features = "nix-command flakes";
+
+  # Enable alternative shell support in nix-darwin.
+  # programs.fish.enable = true;
+
+  # Set Git commit hash for darwin-version.
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 6;
+
+  # The platform the configuration will be used on.
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
+  homebrew = {
+    enable = true;
+    brews = [
+      "proctools"
     ];
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ pkgs.vim
-        ];
+    caskArgs = {
+      require_sha = true;
+    };
+    global.autoUpdate = true;
+    global.brewfile = true;
 
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 6;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-
+    onActivation.cleanup = "zap";
+  };
 }
