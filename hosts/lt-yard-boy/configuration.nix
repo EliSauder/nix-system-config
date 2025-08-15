@@ -35,9 +35,6 @@
 
   homebrew = {
     enable = true;
-    brews = [
-      "proctools"
-    ];
     caskArgs = {
       require_sha = true;
     };
@@ -45,5 +42,27 @@
     global.brewfile = true;
 
     onActivation.cleanup = "zap";
+  };
+
+  homebrew = {
+    casks = [
+      "ghostty"
+      "discord"
+      "docker"
+      "gimp"
+      "inkscape"
+      "nightshade"
+      "obs"
+      "obs-backgroundremoval"
+      "steam"
+      "tor-browser"
+      "vlc"
+      "winbox"
+    ];
+
+    brews = [
+      "colima"
+      "proctools"
+    ];
   };
 }

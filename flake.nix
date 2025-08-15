@@ -2,13 +2,13 @@
   description = "Nixos config flake";
 
   nixConfig = {
-    substituters = [
+    extra-substituters = [
       "https://hyprland.cachix.org"
       "https://nix-community.cachix.org"
       "https://nix-gaming.cachix.org"
       "https://cache.nixos.org"
     ];
-    trusted-public-keys = [
+    extra-trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
@@ -61,17 +61,18 @@
           specialArgs = { inherit inputs; };
           system = "aarch64-darwin";
           modules = [
-            nix-homebrew.darwinModules.nix-homebrew {
-                nix-homebrew = {
-                    enable = true;
-                    enableRosetta = true;
-                    user = "esauder";
-                    taps = {
-                        "homebrew/homebrew-core" = homebrew-core;
-                        "homebrew/homebrew-cask" = homebrew-cask;
-                    };
-                    mutableTaps = false;
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = "esauder";
+                taps = {
+                  "homebrew/homebrew-core" = homebrew-core;
+                  "homebrew/homebrew-cask" = homebrew-cask;
                 };
+                mutableTaps = false;
+              };
             }
             ./hosts/lt-yard-boy/configuration.nix
           ];
@@ -79,5 +80,3 @@
       };
     };
 }
-
-
