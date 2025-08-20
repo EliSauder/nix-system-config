@@ -55,6 +55,14 @@
             ./hosts/dt-thinker-gear/configuration.nix
           ];
         };
+        dt-captive-snack = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          system = "x86_64-linux";
+          modules = [
+            inputs.musnix.nixosModules.musnix
+            ./hosts/dt-captive-snack/configuration.nix
+          ];
+        };
       };
       darwinConfigurations = {
         lt-yard-boy = nix-darwin.lib.darwinSystem {
