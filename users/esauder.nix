@@ -1,19 +1,11 @@
 {pkgs, options, config, lib, ...}:
 {
-    users.knownUsers = [
-        "esauder"
-    ];
-
     users.users.esauder = {
-        uid = 501;
+        uid = 5021;
         shell = pkgs.fish;
         home = if pkgs.stdenv.isLinux then "/home/esauder" else "/Users/esauder";
-    } //
-    lib.optionalAttrs (options?users.users.esauder.extraGroups) {
-        users.users.esauder.extraGroups = ["wheel" "audio"];
-    } //
-    lib.optionalAttrs (options?users.users.esauder.isNormalUser) {
-        users.users.esauder.isNormalUser = true;
+        extraGroups = ["wheel" "audio"];
+        isNormalUser = true;
     };
     # // 
     # lib.optionalAttrs (options?system.activationScripts.applications.text) {

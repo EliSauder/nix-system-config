@@ -35,11 +35,5 @@ in
             obs-vaapi
           ]);
       };
-    }
-    // lib.mkIf (cfg.enable && isDarwin) {
-      homebrew.casks = [
-        "obs"
-        "obs-backgroundremoval"
-      ];
     };
 }

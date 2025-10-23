@@ -5,7 +5,7 @@ in {
     options.prog = {
         dconf.enable = lib.mkEnableOption "Enable dconf";
     };
-    config = lib.optionalAttrs (options?programs.dconf && cfg.enable) {
+    config = lib.mkIf cfg.enable {
         programs.dconf.enable = true;
     };
 }

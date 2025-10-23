@@ -14,7 +14,7 @@ in {
           description = "The time servers to use";
         };
     };
-    config = lib.optionalAttrs ((options?services.chrony) && cfg.enable){
+    config = lib.mkIf cfg.enable {
         services.chrony = {
             enable = true;
             servers = cfg.servers;

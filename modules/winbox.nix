@@ -6,12 +6,7 @@ in {
         winbox.enable = lib.mkEnableOption "Enable winbox";
     };
 
-    config = lib.optionalAttrs (options?homebrew) {
-        homebrew.casks = lib.mkIf cfg.enable [
-            "winbox"
-        ];
-    }
-    // lib.optionalAttrs ((options?programs.winbox) && cfg.enable) {
+    config = lib.mkIf cfg.enable {
         programs.winbox = lib.mkIf cfg.enable {
             enable = true;
             package = pkgs.winbox4;

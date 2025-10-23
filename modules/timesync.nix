@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-    cfg = config.timesync;
-in {
+  cfg = config.timesync;
+in
+{
   imports = [
     ./services/chrony.nix
     ./services/tzupdate.nix
@@ -11,10 +17,10 @@ in {
     timesync.enableChrony = lib.mkOption {
       default = true;
       description = "Enable chrony for time sync";
-    }; 
-    timesync.enableTzUpdate = lib.mkOption { 
+    };
+    timesync.enableTzUpdate = lib.mkOption {
       default = true;
-      description = "Enable tzupdate for automatic timezone settup";
+      description = "Enable tzupdate for automatic timezone setup";
     };
     timesync.defaultTimeZone = lib.mkOption {
       default = "America/Los_Angeles";
@@ -22,7 +28,7 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    
+
     time.timeZone = if cfg.enableTzUpdate then null else cfg.defaultTimeZone;
 
     chrony.enable = cfg.enableChrony;

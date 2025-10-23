@@ -14,15 +14,9 @@ in
     tor-browser.enable = lib.mkEnableOption "Enable Tor Browser";
   };
 
-  config =
-    lib.mkIf (cfg.enable && isLinux) {
+  config = lib.mkIf cfg.enable {
       environment.systemPackages = [
         pkgs.tor-browser
-      ];
-    }
-    // lib.mkIf (cfg.enable && isDarwin) {
-      homebrew.casks = [
-        "tor-browser"
       ];
     };
 }

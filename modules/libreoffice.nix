@@ -25,12 +25,6 @@ in
       environment.systemPackages = [
         pkgs.libreoffice-qt6
       ];
-    }
-    // lib.mkIf (cfg.enable && isDarwin) {
-      homebrew.casks = [
-        "libreoffice"
-        "libreoffice-language-pack"
-      ];
     };
 
 }

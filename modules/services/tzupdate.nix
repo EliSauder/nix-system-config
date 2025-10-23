@@ -5,7 +5,7 @@ in {
   options = {
     tzupdate.enable = lib.mkEnableOption "Enable updating timezones automatically";
   };
-  config = lib.optionalAttrs ((options?services.tzupdate) && cfg.enable) {
+  config = lib.mkIf cfg.enable {
 
     services.tzupdate.enable = true;
 

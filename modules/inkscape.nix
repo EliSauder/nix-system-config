@@ -24,10 +24,5 @@ in
         pkgs.inkscape-extensions.silhouette
         pkgs.inkscape-extensions.applytransforms
       ];
-    }
-    // lib.mkIf (cfg.enable && isDarwin) {
-      homebrew.casks = [
-        "inkscape"
-      ];
     };
 }

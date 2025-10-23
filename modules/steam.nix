@@ -26,15 +26,5 @@ in
         enable = true;
         protontricks.enable = true;
       };
-    }
-    // lib.mkIf (cfg.enable && isDarwin) {
-      homebrew.casks = [
-        {
-          name = "steam";
-          args = {
-            require_sha = false;
-          };
-        }
-      ];
     };
 }

@@ -19,10 +19,5 @@ in
       environment.systemPackages = [
         pkgs.discord
       ];
-    }
-    // lib.mkIf (cfg.enable && isDarwin) {
-      homebrew.casks = [
-        "discord"
-      ];
     };
 }

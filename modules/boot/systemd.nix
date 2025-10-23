@@ -4,8 +4,7 @@ let
 in {
     options.bootmng.systemd.enable = lib.mkEnableOption "Enable systemd";
 
-    config = {} //
-        lib.optionalAttrs ((options?boot) && cfg.enable) {
+    config = {
             boot.loader.systemd-boot.enable = true;
             boot.loader.efi.canTouchEfiVariables = true;
     };

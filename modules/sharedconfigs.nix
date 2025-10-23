@@ -47,9 +47,9 @@ in
   prog.obs-studio.enable = true;
   prog.tor-browser.enable = true;
 
-  timesync.enable = pkgs.stdenv.isLinux;
-  pipewire.enable = pkgs.stdenv.isLinux;
-  networkingsvcs.enable = pkgs.stdenv.isLinux;
+  timesync.enable = true;
+  pipewire.enable = true;
+  networkingsvcs.enable = true;
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -58,14 +58,13 @@ in
 
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
+    enableSSHSupport = false;
   };
 
   nix.gc.automatic = true;
 
   # shells
   programs.zsh.enable = true;
-  programs.bash.enable = true;
   programs.fish.enable = true;
   programs.tmux.enable = true;
 
@@ -75,5 +74,8 @@ in
       "1password"
       "1password-cli"
       "steam"
+      "steam-unwrapped"
+      "discord"
+      "winbox"
     ];
 }

@@ -17,9 +17,8 @@ in {
           description = "Enable jack support";
         };
     };
-    config = lib.optionalAttrs ((options?security.rtkit) && cfg.enable) {
+    config = lib.mkIf cfg.enable {
         security.rtkit.enable = true;
-    } // lib.optionalAttrs ((options?services.pipewire) && cfg.enable) {
         services.pipewire = {
             enable = true;
             pulse.enable = cfg.enablePulse;
