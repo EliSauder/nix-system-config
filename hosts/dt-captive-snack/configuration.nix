@@ -1,13 +1,19 @@
-{ config, lib, inputs, pkgs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-      ./hardware-configuration.nix
-      ./../../modules/graphics/amd.nix
-      ./../../modules/sharedconfigs.nix
-      ./../../users/esauder.nix
-      ./../../modules/ui.nix
-    ];
+    ./hardware-configuration.nix
+    ./../../modules/graphics/amd.nix
+    ./../../modules/sharedconfigs.nix
+    ./../../users/esauder.nix
+    ./../../modules/ui.nix
+  ];
 
   greetd.enable = true;
   hyprland.enable = true;
@@ -18,7 +24,15 @@
   networkingsvcs.enable = true;
   networkingsvcs.hostName = "dt-captive-snack";
 
+  musnix = {
+    enable = true;
+    rtcqs.enable = true;
+    kernel.realtime = true;
+    kernel.packages = pkgs.linuxPackages_latest_rt;
+    alsaSeq.enable = true;
+    das_watchdog.enable = true;
+  };
+
   # Original NixInstalled Version (DO NOT CHANGE)
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-
