@@ -28,8 +28,8 @@
     enable = true;
     rtcqs.enable = true;
     kernel.realtime = true;
-    kernel.packages = pkgs.linuxPackages_latest_rt;
-    alsaSeq.enable = true;
+    kernel.packages = pkgs.linuxPackages_rt;
+    alsaSeq.enable = false;
     das_watchdog.enable = true;
   };
 
