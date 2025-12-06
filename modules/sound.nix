@@ -1,19 +1,22 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./services/pipewire.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-      jack-example-tools
-  ] ++ 
-  (pkgs.lib.optionals pkgs.stdenv.isLinux [
-      zita-alsa-pcmi
+  environment.systemPackages =
+    with pkgs;
+    (pkgs.lib.optionals pkgs.stdenv.isLinux [
       qpwgraph
       pavucontrol
       yabridge
       yabridgectl
-  ]);
+    ]);
 
   #musnix = {
   #    enable = true;

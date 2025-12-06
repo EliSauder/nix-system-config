@@ -11,29 +11,16 @@ in
 {
   options = {
     pipewire.enable = lib.mkEnableOption "Enable pipewire";
-    pipewire.enableAlsa = lib.mkOption {
-      default = true;
-      description = "Enable alsa support";
-    };
-    pipewire.enablePulse = lib.mkOption {
-      default = true;
-      description = "Enable pulse support";
-    };
-    pipewire.enableJack = lib.mkOption {
-      default = true;
-      description = "Enable jack support";
-    };
   };
   config = lib.mkIf cfg.enable {
     services.avahi.enable = true;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
-      pulse.enable = cfg.enablePulse;
-      alsa.enable = cfg.enableAlsa;
-      alsa.support32Bit = cfg.enableAlsa;
-      jack.enable = cfg.enableJack;
-
+      pulse.enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      jack.enable = true;
       wireplumber.enable = true;
 
       raopOpenFirewall = true;
