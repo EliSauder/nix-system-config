@@ -1,0 +1,89 @@
+Dec 07 11:23:17 dt-captive-snack systemd[2513]: Started PipeWire Multimedia Service.
+Dec 07 11:23:17 dt-captive-snack pipewire[3014]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Dec 07 11:23:17 dt-captive-snack pipewire[3014]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Dec 07 11:23:17 dt-captive-snack pipewire[3014]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Dec 07 11:23:17 dt-captive-snack pipewire[3014]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Dec 07 11:23:17 dt-captive-snack pipewire[3014]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Dec 07 11:23:17 dt-captive-snack pipewire[3014]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Dec 07 11:29:55 dt-captive-snack systemd-coredump[10308]: Process 3014 (pipewire) of user 1000 dumped core.
+                                                          
+                                                          Module /nix/store/334afxah19b3hr6ll93pfxlcyhhh2vws-pipewire-1.4.9/bin/pipewire without build-id.
+                                                          Module libspa-control.so without build-id.
+                                                          Module libspa-audiomixer.so without build-id.
+                                                          Module libasound.so.2 without build-id.
+                                                          Module libspa-alsa.so without build-id.
+                                                          Module libspa-audioconvert.so without build-id.
+                                                          Module libpipewire-module-jackdbus-detect.so without build-id.
+                                                          Module libogg.so.0 without build-id.
+                                                          Module libvorbis.so.0 without build-id.
+                                                          Module libXdmcp.so.6 without build-id.
+                                                          Module libXau.so.6 without build-id.
+                                                          Module libltdl.so.7 without build-id.
+                                                          Module libvorbisfile.so.3 without build-id.
+                                                          Module libxcb.so.1 without build-id.
+                                                          Module libcanberra.so.0 without build-id.
+                                                          Module libXfixes.so.3 without build-id.
+                                                          Module libX11.so.6 without build-id.
+                                                          Module libpipewire-module-x11-bell.so without build-id.
+                                                          Module libpipewire-module-session-manager.so without build-id.
+                                                          Module libpipewire-module-link-factory.so without build-id.
+                                                          Module libpipewire-module-adapter.so without build-id.
+                                                          Module libpipewire-module-access.so without build-id.
+                                                          Module libpipewire-module-portal.so without build-id.
+                                                          Module libpipewire-module-client-device.so without build-id.
+                                                          Module libpipewire-module-client-node.so without build-id.
+                                                          Module libpipewire-module-spa-node-factory.so without build-id.
+                                                          Module libpipewire-module-spa-device-factory.so without build-id.
+                                                          Module libpipewire-module-metadata.so without build-id.
+                                                          Module libpipewire-module-profiler.so without build-id.
+                                                          Module libpcre2-8.so.0 without build-id.
+                                                          Module libselinux.so.1 without build-id.
+                                                          Module libpipewire-module-protocol-native.so without build-id.
+                                                          Module libpipewire-module-rt.so without build-id.
+                                                          Module libspa-dbus.so without build-id.
+                                                          Module libcap.so.2 without build-id.
+                                                          Module libspa-journal.so without build-id.
+                                                          Module libspa-support.so without build-id.
+                                                          Module libpipewire-0.3.so.0 without build-id.
+                                                          Stack trace of thread 3017:
+                                                          #0  0x00007f98f4ca7daa snd_seq_event_input (libasound.so.2 + 0xc4daa)
+                                                          #1  0x00007f98f4d931d6 process_read (libspa-alsa.so + 0x911d6)
+                                                          #2  0x00007f98f4d973a4 spa_alsa_seq_process (libspa-alsa.so + 0x953a4)
+                                                          #3  0x00007f990514b0a7 process_node.isra.0 (libpipewire-0.3.so.0 + 0x760a7)
+                                                          #4  0x00007f990514b564 node_on_fd_events (libpipewire-0.3.so.0 + 0x76564)
+                                                          #5  0x00007f98f711a026 loop_iterate (libspa-support.so + 0x8026)
+                                                          #6  0x00007f9905115d46 do_loop (libpipewire-0.3.so.0 + 0x40d46)
+                                                          #7  0x00007f9904f6697a start_thread (libc.so.6 + 0x9a97a)
+                                                          #8  0x00007f9904feed2c __clone3 (libc.so.6 + 0x122d2c)
+                                                          
+                                                          Stack trace of thread 3016:
+                                                          #0  0x00007f9904fef1fa epoll_wait (libc.so.6 + 0x1231fa)
+                                                          #1  0x00007f98f71300a2 impl_pollfd_wait (libspa-support.so + 0x1e0a2)
+                                                          #2  0x00007f98f7119f5f loop_iterate (libspa-support.so + 0x7f5f)
+                                                          #3  0x00007f9905193947 do_loop (libpipewire-0.3.so.0 + 0xbe947)
+                                                          #4  0x00007f9904f6697a start_thread (libc.so.6 + 0x9a97a)
+                                                          #5  0x00007f9904feed2c __clone3 (libc.so.6 + 0x122d2c)
+                                                          
+                                                          Stack trace of thread 3014:
+                                                          #0  0x00007f9904fef1fa epoll_wait (libc.so.6 + 0x1231fa)
+                                                          #1  0x00007f98f71300a2 impl_pollfd_wait (libspa-support.so + 0x1e0a2)
+                                                          #2  0x00007f98f7119f5f loop_iterate (libspa-support.so + 0x7f5f)
+                                                          #3  0x00007f99051446cb pw_main_loop_run (libpipewire-0.3.so.0 + 0x6f6cb)
+                                                          #4  0x000055643cb12729 main (/nix/store/334afxah19b3hr6ll93pfxlcyhhh2vws-pipewire-1.4.9/bin/pipewire + 0x2729)
+                                                          #5  0x00007f9904ef64d8 __libc_start_call_main (libc.so.6 + 0x2a4d8)
+                                                          #6  0x00007f9904ef659b __libc_start_main@@GLIBC_2.34 (libc.so.6 + 0x2a59b)
+                                                          #7  0x000055643cb128b5 _start (/nix/store/334afxah19b3hr6ll93pfxlcyhhh2vws-pipewire-1.4.9/bin/pipewire + 0x28b5)
+                                                          
+                                                          Stack trace of thread 3020:
+                                                          #0  0x00007f9904fef1fa epoll_wait (libc.so.6 + 0x1231fa)
+                                                          #1  0x00007f98f71300a2 impl_pollfd_wait (libspa-support.so + 0x1e0a2)
+                                                          #2  0x00007f98f7119f5f loop_iterate (libspa-support.so + 0x7f5f)
+                                                          #3  0x00007f9905193947 do_loop (libpipewire-0.3.so.0 + 0xbe947)
+                                                          #4  0x00007f9904f6697a start_thread (libc.so.6 + 0x9a97a)
+                                                          #5  0x00007f9904feed2c __clone3 (libc.so.6 + 0x122d2c)
+                                                          ELF object binary architecture: AMD x86-64
+Dec 07 11:29:55 dt-captive-snack systemd[2513]: pipewire.service: Main process exited, code=dumped, status=11/SEGV
+Dec 07 11:29:55 dt-captive-snack systemd[2513]: pipewire.service: Failed with result 'core-dump'.
+Dec 07 11:29:55 dt-captive-snack systemd[2513]: pipewire.service: Consumed 1.545s CPU time, 12.5M memory peak.
+Dec 07 11:29:55 dt-captive-snack systemd[2513]: pipewire.service: Scheduled restart job, restart counter is at 1.
+Dec 07 11:29:55 dt-captive-snack systemd[2513]: Started PipeWire Multimedia Service.

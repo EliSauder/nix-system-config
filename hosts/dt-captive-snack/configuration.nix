@@ -24,13 +24,21 @@
   networkingsvcs.enable = true;
   networkingsvcs.hostName = "dt-captive-snack";
 
+  #boot.blacklistedKernelModules = [
+  #  "snd_seq_dummy"
+  #  "snd_seq_midi"
+  #  "snd_seq_midi_event"
+  #  "snd_seq_device"
+  #  "snd_seq"
+  #];
+
   musnix = {
     enable = true;
-    rtcqs.enable = true;
+    #rtcqs.enable = true;
     kernel.realtime = true;
-    kernel.packages = pkgs.linuxPackages_rt;
-    alsaSeq.enable = false;
-    das_watchdog.enable = true;
+    #kernel.packages = pkgs.linuxPackages_rt;
+    #alsaSeq.enable = false;
+    #das_watchdog.enable = true;
   };
 
   # Original NixInstalled Version (DO NOT CHANGE)
