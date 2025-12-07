@@ -6,11 +6,9 @@
   ...
 }:
 let
-  hyprlandExe = "/run/current-system/sw/bin/start-hyprland";
-  hyprctlExe = "/run/current-system/sw/bin/hyprctl";
   cfg = config.greetd;
   hyprlandConfig = pkgs.writeText "greetd-hyprland-config" ''
-    exec-once = ${config.programs.regreet.package}/bin/regreet; ${hyprctlExe} dispatch exit
+    exec-once = ${pkgs.regreet}/bin/regreet; hyprctl dispatch exit
     misc {
       disable_hyprland_logo = true
       disable_splash_rendering = true
@@ -29,7 +27,7 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${hyprlandExe} -- --config ${hyprlandConfig}";
+          command = "start-hyprland -- --config ${hyprlandConfig}";
         };
       };
     };

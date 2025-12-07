@@ -33,6 +33,8 @@ in
       prettyName = "Hyprland";
       comment = "Hyprland compositor managed by UWSM";
       binPath = "/run/current-system/sw/bin/start-hyprland";
+      extraArgs = [
+      ];
     };
     environment.variables = {
       POLKIT_AUTH_AGENT = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
