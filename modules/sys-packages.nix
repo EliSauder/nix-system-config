@@ -68,7 +68,7 @@
     fira-code
     fira-code-symbols
     fira-sans
-    fira-go
+    #fira-go
     fira-math
     gyre-fonts
     ipafont

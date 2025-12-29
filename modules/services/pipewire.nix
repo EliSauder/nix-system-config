@@ -13,7 +13,7 @@ in
     pipewire.enable = lib.mkEnableOption "Enable pipewire";
   };
   config = lib.mkIf cfg.enable {
-    #services.avahi.enable = true;
+    services.avahi.enable = true;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
@@ -23,23 +23,23 @@ in
       jack.enable = true;
       wireplumber.enable = true;
 
-      #raopOpenFirewall = true;
-      #extraConfig.pipewire."10-airplay" = {
-      #  "context.modules" = [
-      #    {
-      #      name = "libpipewire-module-raop-discover";
-      #    }
-      #  ];
-      #};
+      raopOpenFirewall = true;
+      extraConfig.pipewire."10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+          }
+        ];
+      };
 
-      #extraConfig.pipewire."92-low-latency" = {
-      #  "context.properties" = {
-      #    "default.clock.rate" = 48000;
-      #    "default.clock.quantum" = 64;
-      #    "default.clock.min-quantum" = 32;
-      #    "default.clock.max-quantum" = 256;
-      #  };
-      #};
+      extraConfig.pipewire."92-low-latency" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 512;
+          "default.clock.min-quantum" = 128;
+          "default.clock.max-quantum" = 512;
+        };
+      };
 
       #extraConfig.pipewire-pulse."92-low-latency" = {
       #  "context.properties" = {
@@ -58,23 +58,23 @@ in
       #  };
       #};
 
-      #wireplumber.extraConfig.controlport = {
-      #  "node.features.audio.control-port" = true;
-      #};
+      wireplumber.extraConfig.controlport = {
+        "node.features.audio.control-port" = true;
+      };
 
-      #wireplumber.extraConfig.bluetoothEnhancements = {
-      #  "monitor.bluez.properties" = {
-      #    "bluez5.enable-sbc-xq" = true;
-      #    "bluez5.enable-msbc" = true;
-      #    "bluez5.enable-hw-volume" = true;
-      #    "bluez5.roles" = [
-      #      "hsp_hs"
-      #      "hsp_ag"
-      #      "hfp_hf"
-      #      "hfp_ag"
-      #    ];
-      #  };
-      #};
+      wireplumber.extraConfig.bluetoothEnhancements = {
+        "monitor.bluez.properties" = {
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = true;
+          "bluez5.enable-hw-volume" = true;
+          "bluez5.roles" = [
+            "hsp_hs"
+            "hsp_ag"
+            "hfp_hf"
+            "hfp_ag"
+          ];
+        };
+      };
     };
   };
 }
