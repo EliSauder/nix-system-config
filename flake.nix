@@ -17,11 +17,13 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     hyprland.url = "github:hyprwm/Hyprland";
     musnix.url = "github:musnix/musnix";
 
-    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -39,6 +41,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-unstable,
       nix-darwin,
       nix-homebrew,
       homebrew-cask,
@@ -47,44 +50,71 @@
     }:
     {
       nixosConfigurations = {
-        dt-thinker-gear = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          system = "x86_64-linux";
-          modules = [
-            inputs.musnix.nixosModules.musnix
-            ./hosts/dt-thinker-gear/configuration.nix
-          ];
-        };
-        dt-captive-snack = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          system = "x86_64-linux";
-          modules = [
-            inputs.musnix.nixosModules.musnix
-            ./hosts/dt-captive-snack/configuration.nix
-          ];
-        };
+        dt-thinker-gear =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit inputs;
+              pkgs-unstable = import inputs.nixpkgs-unstable {
+                inherit system;
+              };
+            };
+            modules = [
+              inputs.musnix.nixosModules.musnix
+              ./hosts/dt-thinker-gear/configuration.nix
+            ];
+          };
+        dt-captive-snack =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit inputs;
+              pkgs-unstable = import inputs.nixpkgs-unstable {
+                inherit system;
+              };
+            };
+            modules = [
+              inputs.musnix.nixosModules.musnix
+              ./hosts/dt-captive-snack/configuration.nix
+            ];
+          };
       };
       darwinConfigurations = {
-        lt-yard-boy = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
-          system = "aarch64-darwin";
-          modules = [
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                enableRosetta = true;
-                user = "esauder";
-                taps = {
-                  "homebrew/homebrew-core" = homebrew-core;
-                  "homebrew/homebrew-cask" = homebrew-cask;
-                };
-                mutableTaps = false;
+        lt-yard-boy =
+          let
+            system = "aarch64-darwin";
+          in
+          nix-darwin.lib.darwinSystem {
+            inherit system;
+            specialArgs = {
+              inherit inputs;
+              pkgs-unstable = import inputs.nixpkgs-unstable {
+                inherit system;
               };
-            }
-            ./hosts/lt-yard-boy/configuration.nix
-          ];
-        };
+            };
+            modules = [
+              nix-homebrew.darwinModules.nix-homebrew
+              {
+                nix-homebrew = {
+                  enable = true;
+                  enableRosetta = true;
+                  user = "esauder";
+                  taps = {
+                    "homebrew/homebrew-core" = homebrew-core;
+                    "homebrew/homebrew-cask" = homebrew-cask;
+                  };
+                  mutableTaps = false;
+                };
+              }
+              ./hosts/lt-yard-boy/configuration.nix
+            ];
+          };
       };
     };
 }
