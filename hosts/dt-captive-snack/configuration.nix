@@ -23,6 +23,7 @@
 
   networkingsvcs.enable = true;
   networkingsvcs.hostName = "dt-captive-snack";
+  networkingsvcs.allowPing = true;
 
   #boot.blacklistedKernelModules = [
   #  "snd_seq_dummy"

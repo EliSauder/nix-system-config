@@ -45,6 +45,7 @@
       mpv
       # Other
       ffmpeg
+      nfs-utils
       # UI
     ]
     ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [

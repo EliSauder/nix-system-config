@@ -61,6 +61,9 @@ in
     enableSSHSupport = false;
   };
 
+  services.syncthing.enable = true;
+  services.syncthing.openDefaultPorts = true;
+
   nix.gc.automatic = true;
 
   # shells

@@ -6,6 +6,10 @@
   ...
 }:
 {
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
   users.users.esauder = {
     shell = pkgs.fish;
     home = if pkgs.stdenv.isLinux then "/home/esauder" else "/Users/esauder";
