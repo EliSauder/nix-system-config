@@ -71,6 +71,9 @@ in
   programs.fish.enable = true;
   programs.tmux.enable = true;
 
+  services.thermald.enable = true;
+  powerManagement.enable = true;
+
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
